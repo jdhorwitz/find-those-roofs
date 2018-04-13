@@ -42,8 +42,6 @@ export default class Header extends Component {
             </Menu.Item>
           </Menu.Menu>
         </Menu>
-
-        <Segment />
       </div>
     );
   }

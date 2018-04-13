@@ -3,9 +3,9 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import Header from './Header';
 import Maps from './Maps';
+import List from './List';
 const Landing = () => <h2>Landing</h2>;
 const Dashboard = () => <h2>Dashboard</h2>;
-const List = () => <h2>List</h2>;
 
 const App = () => {
   return (
