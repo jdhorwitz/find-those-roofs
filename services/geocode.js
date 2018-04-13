@@ -1,17 +1,8 @@
 const googleMapsClient = require('@google/maps').createClient({
   key: 'AIzaSyA7CqV9nov2Y2e368jxmFhZEVb62CU8_r4',
 });
-const csv = require('fast-csv');
 
-let results = [];
-
-const getData = () => {
-  csv.fromPath('../data/addresses.csv').transform(function(data) {
-    data.forEach(async d => await getGeoCode(d[0]));
-  });
-};
-
-const getGeoCode = address => {
+module.exports = function getGeoCode(address) {
   googleMapsClient.geocode(
     {
       address,
@@ -20,11 +11,7 @@ const getGeoCode = address => {
       if (!err) {
         results.push(response.json.results);
       }
+      console.log(`added ${response.json.results}`);
     },
   );
-};
-
-module.exports = async function() {
-  await getData();
-  return results;
 };

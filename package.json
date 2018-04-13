@@ -20,6 +20,7 @@
     "fast-csv": "^2.4.1",
     "nodemon": "^1.17.3",
     "papaparse": "^4.3.7",
-    "semantic-ui-react": "^0.79.1"
+    "semantic-ui-react": "^0.79.1",
+    "ya-csv": "^0.10.1"
   }
 }
