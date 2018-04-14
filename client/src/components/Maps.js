@@ -22,7 +22,12 @@ const MapWithMarker = compose(
     defaultZoom={5}
     defaultCenter={{ lat: 41.850033, lng: -87.6500523 }}
   >
-    <Marker title="Ann Arbor" position={{ lat: 42.2808, lng: -83.743 }} />
+    {props.data.map(x => console.log(x))}
+    {props.data.map(
+      ({ place_id, formatted_address, geometry: { location } }) => (
+        <Marker key={place_id} title={formatted_address} position={location} />
+      ),
+    )}
   </GoogleMap>
 ));
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react';
+import { Dimmer, Loader } from 'semantic-ui-react';
 import * as actions from '../actions';
 
 import Header from './Header';
@@ -16,15 +16,20 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props);
-    return !this.props.geo ? (
+    return this.props.geo ? (
       <div>
         <BrowserRouter>
           <div>
             <Header />
             <Route exact path="/" component={Landing} />
-            <Route path="/list" component={List} />
-            <Route path="/map" component={Maps} />
+            <Route
+              path="/list"
+              render={() => <List data={this.props.geo.response.results} />}
+            />
+            <Route
+              path="/map"
+              render={() => <Maps data={this.props.geo.response.results} />}
+            />
           </div>
         </BrowserRouter>
       </div>

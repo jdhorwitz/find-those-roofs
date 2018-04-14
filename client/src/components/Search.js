@@ -1,16 +1,10 @@
 import _ from 'lodash';
-import faker from 'faker';
+import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { Search, Grid, Header } from 'semantic-ui-react';
+import { format } from 'date-fns';
 
-const source = _.times(5, () => ({
-  title: faker.company.companyName(),
-  description: faker.company.catchPhrase(),
-  image: faker.internet.avatar(),
-  price: faker.finance.amount(0, 100, 2, '$'),
-}));
-
-export default class SearchExampleStandard extends Component {
+class SearchComponent extends Component {
   componentWillMount() {
     this.resetComponent();
   }
@@ -18,8 +12,10 @@ export default class SearchExampleStandard extends Component {
   resetComponent = () =>
     this.setState({ isLoading: false, results: [], value: '' });
 
-  handleResultSelect = (e, { result }) =>
-    this.setState({ value: result.title });
+  handleResultSelect = (e, { result }) => {
+    console.log(result);
+    this.setState({ value: result.formatted_address });
+  };
 
   handleSearchChange = (e, { value }) => {
     this.setState({ isLoading: true, value });
@@ -28,17 +24,18 @@ export default class SearchExampleStandard extends Component {
       if (this.state.value.length < 1) return this.resetComponent();
 
       const re = new RegExp(_.escapeRegExp(this.state.value), 'i');
-      const isMatch = result => re.test(result.title);
+      const isMatch = result => re.test(result.formatted_address);
 
       this.setState({
         isLoading: false,
-        results: _.filter(source, isMatch),
+        results: _.filter(this.props.geo.response.results, isMatch),
       });
     }, 300);
   };
 
   render() {
     const { isLoading, value, results } = this.state;
+    const { geo } = this.props;
 
     return (
       <Grid>
@@ -58,3 +55,9 @@ export default class SearchExampleStandard extends Component {
     );
   }
 }
+
+function mapStateToProps({ geo }) {
+  return { geo };
+}
+
+export default connect(mapStateToProps, null)(SearchComponent);

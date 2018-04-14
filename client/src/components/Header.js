@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Input, Menu, Segment } from 'semantic-ui-react';
 
-import Search from './Search';
+// import Search from './Search';
+import AutoCompleteSearch from './AutoCompleteSearch';
 
 export default class Header extends Component {
   state = { activeItem: 'home' };
@@ -38,7 +39,7 @@ export default class Header extends Component {
           />
           <Menu.Menu position="right">
             <Menu.Item>
-              <Search />
+              <AutoCompleteSearch />
             </Menu.Item>
           </Menu.Menu>
         </Menu>
