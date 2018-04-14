@@ -8,7 +8,6 @@ import Header from './Header';
 import Maps from './Maps';
 import List from './List';
 import Landing from './Landing';
-const Dashboard = () => <h2>Dashboard</h2>;
 
 class App extends Component {
   componentDidMount() {

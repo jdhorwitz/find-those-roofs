@@ -1,10 +1,15 @@
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { Search, Grid, Header } from 'semantic-ui-react';
-import { format } from 'date-fns';
+import { Search, Grid } from 'semantic-ui-react';
 
 class SearchComponent extends Component {
+  state = {
+    isLoading: false,
+    results: [],
+    value: '',
+  };
+
   componentWillMount() {
     this.resetComponent();
   }
@@ -13,7 +18,6 @@ class SearchComponent extends Component {
     this.setState({ isLoading: false, results: [], value: '' });
 
   handleResultSelect = (e, { result }) => {
-    console.log(result);
     this.setState({ value: result.formatted_address });
   };
 
@@ -35,18 +39,22 @@ class SearchComponent extends Component {
 
   render() {
     const { isLoading, value, results } = this.state;
-    const { geo } = this.props;
 
     return (
       <Grid>
         <Grid.Column width={8}>
           <Search
+            type="text"
+            size="big"
             loading={isLoading}
             onResultSelect={this.handleResultSelect}
             onSearchChange={_.debounce(this.handleSearchChange, 500, {
               leading: true,
             })}
             results={results}
+            resultRenderer={props => {
+              return <h4>{props.formatted_address}</h4>;
+            }}
             value={value}
             {...this.props}
           />
