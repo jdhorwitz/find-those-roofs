@@ -1,14 +1,39 @@
-const lineReader = require('line-reader');
+const csv = require('fast-csv');
+const path = require('path');
+const keys = require('../config/keys');
 
-const results = [];
+const csvPath = path.resolve('./addresses.csv');
 
-module.exports = function() {
-  lineReader.eachLine('addresses.csv', function(line, last) {
-    console.log('in here');
-    results.push(line);
+const googleMapsClient = require('@google/maps').createClient({
+  key: keys.GOOGLE_GEOCODE_KEY,
+});
 
-    if (last) {
-      return results;
-    }
-  });
+let results = [];
+
+const csvstream = new Promise((resolve, reject) => {
+  csv
+    .fromPath(csvPath)
+    .on('data', function(row) {
+      googleMapsClient.geocode(
+        {
+          address: row[0],
+        },
+        function(err, response) {
+          if (!err) {
+            results.push(response.json.results);
+          }
+        },
+      );
+    })
+    .on('end', function() {
+      resolve(results);
+    })
+    .on('error', function(error) {
+      reject(error);
+    });
+});
+
+module.exports = async function() {
+  await csvstream;
+  return results;
 };

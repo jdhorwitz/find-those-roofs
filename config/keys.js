@@ -1,5 +1,3 @@
-if (process.env.NODE_ENV === 'production') {
-    module.exports = require('./prod');
-} else {
-    module.exports = require('./dev');
-}
+module.exports = {
+  GOOGLE_GEOCODE_KEY: 'AIzaSyA7CqV9nov2Y2e368jxmFhZEVb62CU8_r4',
+};
