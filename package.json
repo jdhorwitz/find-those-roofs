@@ -12,17 +12,10 @@
   "dependencies": {
     "@google/maps": "^0.4.6",
     "concurrently": "^3.5.1",
-    "csv-parse": "^2.2.0",
-    "csv-string": "^3.1.2",
-    "csv-to-array": "^1.0.2",
-    "csvtojson": "^1.1.9",
     "express": "^4.16.3",
     "fast-csv": "^2.4.1",
-    "line-reader": "^0.4.0",
     "nodemon": "^1.17.3",
-    "papaparse": "^4.3.7",
     "react-autocomplete": "^1.8.1",
-    "semantic-ui-react": "^0.79.1",
-    "ya-csv": "^0.10.1"
+    "semantic-ui-react": "^0.79.1"
   }
 }

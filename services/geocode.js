@@ -14,16 +14,7 @@ const csvstream = new Promise((resolve, reject) => {
   csv
     .fromPath(csvPath)
     .on('data', function(row) {
-      googleMapsClient.geocode(
-        {
-          address: row[0],
-        },
-        function(err, response) {
-          if (!err) {
-            results.push(response.json.results);
-          }
-        },
-      );
+      getGeoCodeInfo(row);
     })
     .on('end', function() {
       resolve(
@@ -34,6 +25,19 @@ const csvstream = new Promise((resolve, reject) => {
       reject(error);
     });
 });
+
+const getGeoCodeInfo = row => {
+  googleMapsClient.geocode(
+    {
+      address: row[0],
+    },
+    function(err, response) {
+      if (!err) {
+        results.push(response.json.results);
+      }
+    },
+  );
+};
 
 module.exports = async function() {
   await csvstream;
