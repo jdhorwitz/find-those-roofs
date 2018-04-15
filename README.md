@@ -12,6 +12,4 @@ This will start both the server and the client, available on `localhost:3000`
 
 To run tests
 
-Navigate to the client directory and run
-
 `yarn test` or `npm test`
