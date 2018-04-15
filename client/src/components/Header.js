@@ -14,7 +14,7 @@ export default class Header extends Component {
 
     return (
       <div>
-        <Menu pointing>
+        <Menu pointing fluid widths={4}>
           <Menu.Item
             as={Link}
             to="/"
@@ -36,11 +36,9 @@ export default class Header extends Component {
             active={activeItem === 'map'}
             onClick={this.handleItemClick}
           />
-          <Menu.Menu position="right">
-            <Menu.Item>
-              <Search />
-            </Menu.Item>
-          </Menu.Menu>
+          <Menu.Item>
+            <Search />
+          </Menu.Item>
         </Menu>
       </div>
     );

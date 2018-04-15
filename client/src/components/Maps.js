@@ -6,11 +6,12 @@ import {
   GoogleMap,
   Marker,
 } from 'react-google-maps';
+import { Container } from 'semantic-ui-react';
+import { GOOGLE_MAP_URL } from '../config/key';
 
 const MapWithMarker = compose(
   withProps({
-    googleMapURL:
-      'https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places',
+    googleMapURL: GOOGLE_MAP_URL,
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `800px` }} />,
     mapElement: <div style={{ height: `100%` }} />,
@@ -18,17 +19,22 @@ const MapWithMarker = compose(
   withScriptjs,
   withGoogleMap,
 )(props => (
-  <GoogleMap
-    defaultZoom={5}
-    defaultCenter={{ lat: 41.850033, lng: -87.6500523 }}
-  >
-    {props.data.map(x => console.log(x))}
-    {props.data.map(
-      ({ place_id, formatted_address, geometry: { location } }) => (
-        <Marker key={place_id} title={formatted_address} position={location} />
-      ),
-    )}
-  </GoogleMap>
+  <Container>
+    <GoogleMap
+      defaultZoom={5}
+      defaultCenter={{ lat: 37.850033, lng: -92.6500523 }}
+    >
+      {props.data.map(
+        ({ place_id, formatted_address, geometry: { location } }) => (
+          <Marker
+            key={place_id}
+            title={formatted_address}
+            position={location}
+          />
+        ),
+      )}
+    </GoogleMap>
+  </Container>
 ));
 
 export default MapWithMarker;

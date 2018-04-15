@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Dimmer, Loader } from 'semantic-ui-react';
+import _ from 'lodash';
 import * as actions from '../actions';
 
 import Header from './Header';
@@ -15,20 +16,18 @@ class App extends Component {
   }
 
   render() {
+    const flattenedGeo = this.props.geo
+      ? _.flatten(this.props.geo.response)
+      : undefined;
+
     return this.props.geo ? (
       <div>
         <BrowserRouter>
           <div>
             <Header />
             <Route exact path="/" component={Landing} />
-            <Route
-              path="/list"
-              render={() => <List data={this.props.geo.response.results} />}
-            />
-            <Route
-              path="/map"
-              render={() => <Maps data={this.props.geo.response.results} />}
-            />
+            <Route path="/list" render={() => <List data={flattenedGeo} />} />
+            <Route path="/map" render={() => <Maps data={flattenedGeo} />} />
           </div>
         </BrowserRouter>
       </div>

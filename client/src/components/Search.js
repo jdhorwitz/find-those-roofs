@@ -32,7 +32,7 @@ class SearchComponent extends Component {
 
       this.setState({
         isLoading: false,
-        results: _.filter(this.props.geo.response.results, isMatch),
+        results: _.filter(_.flatten(this.props.geo.response), isMatch),
       });
     }, 300);
   };
@@ -52,8 +52,13 @@ class SearchComponent extends Component {
               leading: true,
             })}
             results={results}
+            partial_match="true"
             resultRenderer={props => {
-              return <h4>{props.formatted_address}</h4>;
+              return (
+                <h4 style={{ paddingRight: '10rem' }}>
+                  {props.formatted_address}
+                </h4>
+              );
             }}
             value={value}
             {...this.props}
