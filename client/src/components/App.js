@@ -21,13 +21,21 @@ class App extends Component {
       : undefined;
 
     return this.props.geo ? (
-      <div>
+      <div cassName="main-app">
         <BrowserRouter>
           <div>
             <Header />
-            <Route exact path="/" component={Landing} />
-            <Route path="/list" render={() => <List data={flattenedGeo} />} />
-            <Route path="/map" render={() => <Maps data={flattenedGeo} />} />
+            <Route className="route" exact path="/" component={Landing} />
+            <Route
+              className="route"
+              path="/list"
+              render={() => <List data={flattenedGeo} />}
+            />
+            <Route
+              className="route"
+              path="/map"
+              render={() => <Maps data={flattenedGeo} />}
+            />
           </div>
         </BrowserRouter>
       </div>

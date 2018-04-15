@@ -1,7 +1,7 @@
 import React from 'react';
 import { Header, List, Container, Divider } from 'semantic-ui-react';
 
-const ListExampleCelled = ({ data }) => (
+const ListResults = ({ data }) => (
   <Container textAlign="center">
     <Divider hidden />
     <Header inverted block as="h2">
@@ -21,4 +21,4 @@ const ListExampleCelled = ({ data }) => (
   </Container>
 );
 
-export default ListExampleCelled;
+export default ListResults;
