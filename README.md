@@ -2,7 +2,7 @@
 
 To run application, clone the repostiory and run
 
-`yarn install` or `npm install`
+`yarn run bootstrap` or `npm run bootstrap`
 
 Followed by
 
