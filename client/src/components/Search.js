@@ -44,6 +44,7 @@ class SearchComponent extends Component {
       <Grid>
         <Grid.Column width={8}>
           <Search
+            dispatch={true}
             type="text"
             size="big"
             loading={isLoading}

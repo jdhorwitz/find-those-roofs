@@ -16,7 +16,9 @@ const Landing = () => {
         Looking for locations and are just sick and tired of having to search
         through and find the ones with roofs????
       </Header>
-      <Header as="h3">So were we! Let us help you</Header>
+      <Divider hidden />
+      <Header as="h3">So were we! Let us help you choose.</Header>
+      <p>See results in either list or map view</p>
       <Button size="huge">
         <Link to="/list">List View</Link>
       </Button>

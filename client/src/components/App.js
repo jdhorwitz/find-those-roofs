@@ -15,13 +15,20 @@ class App extends Component {
     this.props.fetchLocations();
   }
 
+  normalizeResults(data) {
+    const flat = _.flatten(data);
+    _.uniqBy(flat, x => {
+      return x.formatted_address;
+    });
+  }
+
   render() {
     const flattenedGeo = this.props.geo
-      ? _.flatten(this.props.geo.response)
+      ? Array.from(new Set(_.flatten(this.props.geo.response)))
       : undefined;
 
     return this.props.geo ? (
-      <div cassName="main-app">
+      <div className="main-app">
         <BrowserRouter>
           <div>
             <Header />

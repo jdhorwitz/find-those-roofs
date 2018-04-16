@@ -18,21 +18,15 @@ const MapWithMarker = compose(
   }),
   withScriptjs,
   withGoogleMap,
-)(props => (
+)(({ data }) => (
   <Container>
     <GoogleMap
       defaultZoom={5}
       defaultCenter={{ lat: 37.850033, lng: -92.6500523 }}
     >
-      {props.data.map(
-        ({ place_id, formatted_address, geometry: { location } }) => (
-          <Marker
-            key={place_id}
-            title={formatted_address}
-            position={location}
-          />
-        ),
-      )}
+      {data.map(({ place_id, formatted_address, geometry: { location } }) => (
+        <Marker key={place_id} title={formatted_address} position={location} />
+      ))}
     </GoogleMap>
   </Container>
 ));
